@@ -16,6 +16,7 @@ public:
     bool saveToFile(const std::string& filename) const;
     bool hasKey(const std::string& key) const;
     void clear();
+    std::string findAccountByIdCard(const std::string& idCard);
 };
 
-#endif // SIMPLE_JSON_H
+#endif

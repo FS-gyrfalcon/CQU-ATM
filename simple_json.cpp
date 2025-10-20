@@ -57,3 +57,15 @@ bool SimpleJson::hasKey(const std::string& key) const {
 void SimpleJson::clear() {
     data.clear();
 }
+
+std::string SimpleJson::findAccountByIdCard(const std::string& idCard) {
+    for (const auto& pair : data) {
+        if (pair.first.find("_idcard") != std::string::npos && pair.second == idCard) {
+            size_t pos = pair.first.find("_idcard");
+            if (pos != std::string::npos) {
+                return pair.first.substr(0, pos);
+            }
+        }
+    }
+    return "";
+}

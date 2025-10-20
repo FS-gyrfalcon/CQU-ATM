@@ -22,7 +22,7 @@ private:
     const double DAILY_WITHDRAWAL_LIMIT = 5000.0;
     const double SINGLE_WITHDRAWAL_LIMIT = 2000.0;
 
-    // FTXUI组件状态
+    // UI状态变量
     std::string accountInput;
     std::string passwordInput;
     std::string message;
@@ -34,6 +34,8 @@ private:
     std::string oldPassword;
     std::string newPassword;
     std::string confirmPassword;
+    std::string idCardInput;
+    std::string nameInput;
 
     int selectedMenuItem;
     bool shouldExit;
@@ -44,12 +46,12 @@ public:
     void run();
 
 private:
-    // 核心功能方法
+    // 核心业务方法
     void loadUserData();
     void saveUserData();
     bool isAccountExists(const std::string& account);
     bool login();
-    bool createNewAccount(const std::string& account);
+    bool createNewAccount();
     void handleMenuSelection(int selection);
     void handleWithdraw();
     void handleTransfer();
@@ -57,9 +59,13 @@ private:
     void ejectCard();
     bool isAllDigits(const std::string& str);
     std::string getCurrentTime();
+    bool isValidIdCard(const std::string& idCard);
+    bool isValidAccount(const std::string& account);
+    bool isIdCardRegistered(const std::string& idCard);
 
-    // UI组件创建方法
+    // UI组件方法
     Component createLoginComponent();
+    Component createRegisterComponent();
     Component createMainMenuComponent();
     Component createBalanceComponent();
     Component createWithdrawComponent();
@@ -70,11 +76,10 @@ private:
     // UI辅助方法
     Element largeText(const std::string& content);
     Element titleText(const std::string& content);
-    Element highlightText(const std::string& content);
     Component largeButton(const std::string& label, std::function<void()> on_click);
     Component largeInput(std::string* content, const std::string& placeholder);
     Element card(Element content);
     Element infoPanel(const std::string& title, const std::vector<std::string>& items);
 };
 
-#endif // ATM_UI_H
+#endif
